@@ -1,6 +1,8 @@
 """ Day 07/2022: No Space Left On Device """
 
-"""Using a dict approach"""
+"""Using a dict approach. This builds a stack as we tranverse down each directory.
+When a file is parsed the dict is populated with a tuple of the stack and it's value is increment by the file size.
+We move up the stack and add it's tuple as a key and incremental it's value by the file size. """
 
 from collections import defaultdict
 
@@ -9,6 +11,13 @@ dirs = defaultdict(int)
 path = []
 
 lines = map(str.split, open("./resources/07_test.txt").read().splitlines())
+
+
+for l in lines:
+    print(l)
+
+
+
 
 
 for l in lines:
