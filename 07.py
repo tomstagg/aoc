@@ -2,6 +2,12 @@
 """ Day 07/2022: No Space Left On Device """
 
 
+"""I built a tree to do this - it was my first attempt.
+First created the tree structure parsed on the instructions. 
+Second sumed the files up the the parent directory level.
+Third populated an array of directory totals from top to bottom.
+Used this to find the answers"""
+
 class Tree:
     def __init__(self, name, size=0, parent=None):
         self.name = name
@@ -16,50 +22,69 @@ class Tree:
         return tree
 
     def __repr__(self) -> str:
-        return f"name: {self.name} size: {self.size} children_count: {str(len(self.children))} parent: {self.parent.name if self.parent else None}"
+        return f"{self.name} size:{self.size}"
 
     def print_tree(self, prefix=""):
         print(prefix + repr(self))
         for child in self.children:
             child.print_tree(prefix + " " * 4)
 
-    def traverse(self):
-        total = 0
-        for child in self.children:
-            total += child.traverse()
 
-        if len(self.children) == 0:
-            return self.size
-        else:
-            print(self.name, total)
-            return total
-
-        
-
-    # def traverse_and_sum(self):
-    #     total = 0
-    #     for child in self.children:
-    #         if child.
-    #     if self.children:
+data = open("./resources/07_input.txt").read().splitlines()
 
 
-t = Tree("top", 0)
-t.add_child("a", 1)
-t.add_child("b", 2)
-c = t.add_child("c", 0)
-c.add_child("d", 4)
-c.add_child("e", 5)
+def populate_tree():
+    parent_node = None
+    for cmd in data:
+        # print (cmd)
+        if cmd.startswith("$ cd /"):
+            node = Tree("/")
+            parent_node = node
+            continue
+        if cmd.startswith("dir"):
+            name = cmd.split(" ")[-1]
+            node.add_child(name, 0)
+            continue
+        if cmd.startswith("$ cd .."):
+            node = node.parent
+        if cmd.startswith("$ cd"):
+            dirname = cmd.split(" ")[-1]
+            for n in node.children:
+                if n.name == dirname:
+                    node = n
+                    break
+            continue
+        if not cmd.startswith("$ ls"):
+            name = cmd.split(" ")[1]
+            size = int(cmd.split(" ")[0])
+            node.add_child(name, size)
+
+    return parent_node
 
 
-print(t)
+def sum_files(node):
+    total = 0
+    if len(node.children) > 0:
+        for child in node.children:
+            total += sum_files(child)
+        node.size = total
+        return total
+    else:
+        return node.size
 
-# t.print_tree()
-# t.traverse()
 
+def traverse(node):
+    if len(node.children) > 0:
+        totals.append(node.size)
+    for child in node.children:
+        traverse(child)
 
-# top
-#     a 1
-#     b 2
-#     c
-#         d 4
-#         e 5
+full = populate_tree()
+sum_files(full)
+full.print_tree()
+
+totals = []
+traverse(full)
+
+print("part 1:", sum([v for v in totals if v <= 100000]))
+print("part 2:", min([v for v in totals if v >= totals[0] - 40000000]))
