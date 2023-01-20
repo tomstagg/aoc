@@ -2,72 +2,52 @@
 
 """Using a dict approach. This builds a stack as we tranverse down each directory.
 When a file is parsed the dict is populated with a tuple of the stack and it's value is increment by the file size.
-We move up the stack and add it's tuple as a key and incremental it's value by the file size. """
+We move up the stack and add it's tuple as a key and incremental it's value by the file size.
+
+Demonstrates:
+- dict approach
+- match case statement
+- itertools accumulate function """
 
 from collections import defaultdict
+from itertools import accumulate
 
 
-dirs = defaultdict(int)
-path = []
+dirs, path = defaultdict(int), []
 
-lines = map(str.split, open("./resources/07_test.txt").read().splitlines())
+data = open("./resources/07_input.txt").read().splitlines()
 
+lines = map(str.split, data)
 
-for l in lines:
-    print(l)
-
-
-
-
-
-for l in lines:
-    if l[0] == "$":
-        if l[1] == "cd":
-            if l[2] == "..":
-                path.pop()
-            else:
-                path.append(l[2])
-    elif l[0] != "dir":
-        for i in range(len(path)):
-            dirs[tuple(path[: i + 1])] += int(l[0])
-    print(l)
-    print(dirs)
-    print(path)
-    print('*' * 5)
+# standard if elif flow:
+# for l in lines:
+#     if l[0] == "$":
+#         if l[1] == "cd":
+#             if l[2] == "..":
+#                 path.pop()
+#             else:
+#                 path.append(l[2])
+#     elif l[0] != "dir":
+#         for p in accumulate(path):
+#             dirs[p] += int(l[0])
 
 
-# path_test = ["a", "b", "c"]
+for line in data:
+    match line.split():
+        case "$", "cd", "..":
+            path.pop()
+        case "$", "cd", x:
+            path.append(x)
+        case "$", "ls":
+            continue
+        case "dir", _:
+            continue
+        case size, _:
+            for p in accumulate(path):
+                dirs[p] += int(size)
 
-# for i in range(len(path_test)):
-#     print(tuple(path_test[: i + 1]))
-#     # dirs[tuple(path_test[: i + 1])] += int(1)
-
-# for v in dirs.values():
-#     print(v)
-
-
-
-print("part 1", sum([v for v in dirs.values() if v <=100000]))
-print("part 2", min([v for v in dirs.values() if v >= max(dirs.values()) - 40000000 ]))
-
-# print(path_test)
-# print(len(path_test))
-# print(range(len(path_test)))
-# print(tuple(path_test))
-
-# print(dirs)
-
-# /
-#     a
-#         e
-#             i 584
-#         f 29116
-#         g 2557
-#         h 62596
-#     b 14848514
-#     c 8504156
-#     d
-#         j 8033020
-#         d.log 8033020
-#         d.ext 5626152
-#         k 7214296
+print(dirs)
+print("part 1", sum([v for v in dirs.values() if v <= 100_000]))
+print("part 2", min([v for v in dirs.values() if v >= max(dirs.values()) - 40_000_000]))
+# part 1 1778099
+# part 2 1623571
