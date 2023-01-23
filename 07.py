@@ -1,22 +1,34 @@
+#!/usr/bin/env python3
+
 class Tree:
-    def __init__(self, name, value):
+    def __init__(self, name, type="dir", size:int = 0 ):
         self.children = []
         self.name = name
-        self.value = 0
+        self.type = type
+        self.size = size
 
 
-    def add_child(self, name, value):
-        self.children.append(Tree(name, value))
+    def add_child(self, name, type, size):
+        self.children.append(Tree(name, type, size))
+
+
+    def print_tree(self):
+        print(self.name)
+        for child in self.children:
+            child.print_tree()
+
+
+
 
     
+t = Tree("*")
+t.add_child("b.txt", "file", 1)
+t.add_child("c.txt", "file", 1)
+t.add_child("d.txt", "file", 1)
 
 
-t = Tree("\\", 0)
+t.print_tree()
 
-t.add_child("b.txt", 14848514)
-t.add_child("c.dat", 8504156)
-t.add_child("a",0)
-# t.a.add_child("f",29116)
+print(t.children[0].name)
 
 
-print (t.children)
