@@ -9,6 +9,9 @@ h_x, h_y, t_x, t_y = 1, 3, 1, 3
 
 # gap = lambda h_x, h_y, t_x, t_y: (t_x - h_x, t_y - h_y)
 
+data = open("./resources/09_test.txt").read()
+print(data)
+
 
 # print(gap(1,2,3,4))
 
@@ -30,4 +33,4 @@ for direction in ["R", "R", "U", "U", "L", "L", "R","D","D","D", "D"]:
         t_y += int((h_y - t_y) * 0.5) if h_x == t_x else 0
 
 
-    print(direction, "h:", h_x, h_y, "t:", t_x, t_y)
+    # print(direction, "h:", h_x, h_y, "t:", t_x, t_y)
