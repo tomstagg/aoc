@@ -2,7 +2,7 @@
 data = open("./resources/09_input.txt").read().splitlines()
 visits = set()
 
-rope = [[11, -5] for _ in range(10)]
+rope = [[0, 0] for _ in range(10)]
 
 def printout():
     for y in range(-20, 1):
@@ -32,6 +32,7 @@ for cmd in data:
             h_x += -1
         if direction == "D":
             h_y += 1
+
         rope[0] = [h_x, h_y]
 
         for i in range(1, len(rope)):
@@ -58,5 +59,6 @@ for cmd in data:
     # printout()
 
 print("part1:", len(visits))  # 6406
+print("part2:", len(visits))  # part1: 6406, part2: 2643
 
 
