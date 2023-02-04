@@ -1,3 +1,5 @@
+"""Day 9: Rope Bridge"""
+
 
 data = open("./resources/09_input.txt").read().splitlines()
 visits = set()

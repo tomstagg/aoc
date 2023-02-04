@@ -25,7 +25,7 @@ print("== INITIAL STATE ==")
 # printout()
 for cmd in data:
     direction, steps = cmd.split(" ")
-    # print("== ", direction, steps, " ==")
+    print("== ", direction, steps, " ==")
     for _ in range(int(steps)):
         dx, dy = move[direction]
         rope[0][0] += dx
@@ -38,24 +38,12 @@ for cmd in data:
             dx = h_x - t_x
             dy = h_y - t_y
 
-            # if dx == 0 or dy == 0:
-            #     t_x += nudge(dx)
-            #     t_y += nudge(dy)
-            # elif (abs(dx), abs(dy)) != (1,1):
-            #     t_x += nudge(dx)
-            #     t_y += nudge(dy)
-
-
-            # moves laterally or vertically away from diagonally
-            if (abs(dx) > 1 and abs(dy) == 1) or (abs(dy) > 1 and abs(dx) == 1):
-                t_x += nudge(dx)
-                t_y += nudge(dy)
-            # moves diagonally away by 2 - part 2 pattern only
-            if abs(dx) > 1 and abs(dy) > 1:
-                t_x += nudge(dx)
-                t_y += nudge(dy)
-            # moves lateral or vertical away by 2
-            if (abs(dx) > 1 and dy == 0) or (abs(dy) > 1 and dx == 0):
+            if dx == 0 or dy == 0:
+                if abs(dx) == 2:
+                    t_x += nudge(dx)
+                if abs(dy) == 2:
+                    t_y += nudge(dy)
+            elif (abs(dx), abs(dy)) != (1,1):
                 t_x += nudge(dx)
                 t_y += nudge(dy)
 
@@ -65,3 +53,25 @@ for cmd in data:
         # printout()
 
 print("part1:", len(visits[1]), "part2:", len(visits[9])) # p1: 6406, p2: 2643
+
+
+
+
+# complex number solution - probably the best
+
+# rope = [0] * 10
+# seen = [set([x]) for x in rope]
+# dirs = {'L':+1, 'R':-1, 'D':1j, 'U':-1j}
+# sign = lambda x: complex((x.real>0) - (x.real<0), (x.imag>0) - (x.imag<0))
+
+# for line in open('in.txt'):
+#     for _ in range(int(line[2:])):
+#         rope[0] += dirs[line[0]]
+
+#         for i in range(1, 10):
+#             dist = rope[i-1] - rope[i]
+#             if abs(dist) >= 2:
+#                 rope[i] += sign(dist)
+#                 seen[i].add(rope[i])
+
+# print(len(seen[1]), len(seen[9]))
