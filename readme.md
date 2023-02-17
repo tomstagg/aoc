@@ -8,7 +8,7 @@
 - [hughcoleman github solutions](https://github.com/hughcoleman/advent-of-code/blob/main/2022)
 - [David Singleton AOC Blog](https://blog.singleton.io/posts/2023-01-14-advent-of-code/)
 - [reddit](https://www.reddit.com/r/adventofcode/)
-
+- [coding tips and utils from mcpower](https://gist.github.com/mcpower/87427528b9ba5cac6f0c679370789661)
 
 
 ## What I'm learning
