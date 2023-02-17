@@ -60,16 +60,12 @@ def rounds(no, wl_factor, parsed):
                 wl = calc_wl(item, op, val, wl_factor)
                 mk_items[send_to(wl, div_test, route)].put(wl % cycle_length)
                 inspected[i] += 1
-                # print(item, list(q_items.queue), mks[i], receive_mk, wl)
-                # print(item,  mks[i], f"{wl} item to {receive_mk}")
-            # print()
         if r in [1, 20, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]:
             print(f"## after round {r} ##")
             for idx, i in enumerate(inspected):
                 print(f"Monkey: {idx} inspected {i}")
             print()
-            # for item in mk_items:
-            #     print(list(item.queue))
+
 
     return prod(sorted(inspected)[-2:])
 
