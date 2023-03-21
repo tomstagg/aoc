@@ -53,7 +53,6 @@ def rounds(no, wl_factor, parsed):
     for r in range(1, no + 1):
 
         for i, q_items in enumerate(mk_items):
-            # print(f'## turn {i} ##')
             while not q_items.empty():
                 op, val, div_test, route = mks[i]
                 item = q_items.get()
