@@ -11,9 +11,11 @@
 - [coding tips and utils from mcpower](https://gist.github.com/mcpower/87427528b9ba5cac6f0c679370789661)
 
 
-## What I'm learning
+## What I am learning
 
 Write less code - less code means fewer bugs.
+
+Running jupyter: `uv run --with jupyter jupyter lab`
 
 ### Day 8: Treetop Tree House
 
@@ -22,3 +24,26 @@ I build up,down,left and right functions to check directions and a function to t
 - keep a grid of scores for part 1 and part 2
 - use [next and generators](https://realpython.com/introduction-to-python-generators/) to stop at a index number in an bool array 
 - that bitwise operator tilde (~) doesn't work on list of bools but does on numpy's bool array. You can instead use not [link](https://stackoverflow.com/questions/13600988/python-tilde-unary-operator-as-negation-numpy-bool-array)
+
+### 2024-01: Historian Hysteria
+
+Extracting data from the txt files using `split()`. This will split on any whitespace, rather the `splitlines()` which is at the end of the line.
+
+The unpackage operator (`*`) unpackages a list into function arguments or unpacks multiple values into a list:
+```python
+data = ['1', '2' ,'3' ,'4' ,'5']
+[*map(int, data)] # [1, 2, 3, 4, 5]
+```
+
+List slicing using step size to take alternative elements: 
+```python
+data = [1, 2, 3, 4, 5, 6]
+data[1::2] # [2, 4, 6]
+```
+
+Counting on lists:
+```python
+data = [0 ,0 ,1]
+data.count(0) # 2
+```
+
