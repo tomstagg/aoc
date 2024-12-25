@@ -19,7 +19,6 @@ for item in loc_2:
 
 part_2 = sum(item * occurance.get(item, 0) for item in loc_1)
 
-
 print(part_1, part_2)
 
 

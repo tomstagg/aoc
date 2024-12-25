@@ -47,3 +47,10 @@ data = [0 ,0 ,1]
 data.count(0) # 2
 ```
 
+### 2024-02: Red-Nosed Reports
+
+Rather than using zip to get current and next item, just use `d[i]` and `d[i+1]`.
+Sets will return just the unique values from a list.
+You can reverse a list by doing `d[::-1]` so don't need to build incrementing and decrementing comparisions.
+
+### 2024-03 Mull It Over
